@@ -3,19 +3,19 @@ import Home from './pages/Home';
 import WalletPage from './pages/WalletPage'
 import NftPage from './pages/NftPage'
 import BrowsePage from './pages/BrowsePage'
-import './App.css'
+
 
 function App() {
   
   return (
-    <>    
-    <Routes>
-      <Route path="/" element={<Home />} />   
-      <Route path="/wallet" element={<WalletPage />} /> 
-      <Route path="/nft" element={<NftPage />} /> 
-      <Route path="/browse" element={<BrowsePage />} /> 
-    </Routes>  
-    </>
+    <div>   
+      <Routes>
+        <Route path="/" element={<Home />} />   
+        <Route path="/wallet" element={<WalletPage />} /> 
+        <Route path="/nft" element={<NftPage />} /> 
+        <Route path="/browse" element={<BrowsePage />} /> 
+      </Routes>     
+    </div>
   )
 }
 export default App;
