@@ -14,6 +14,7 @@ const SingleFileUploader = () => {
     "initial" | "uploading" | "success" | "fail"
   >("initial");
   const [ipfs, setIpfsHash] = useState<"">("");
+  const [comment, setComment] = useState<"">("");
   
   const JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIxZWFhMGU3NS0xNDkxLTQ2NTItODljYy0zNTkyNGI3ODcwMzEiLCJlbWFpbCI6ImRhcC5wYXltZW50c0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicGluX3BvbGljeSI6eyJyZWdpb25zIjpbeyJpZCI6Ik5ZQzEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX1dLCJ2ZXJzaW9uIjoxfSwibWZhX2VuYWJsZWQiOmZhbHNlLCJzdGF0dXMiOiJBQ1RJVkUifSwiYXV0aGVudGljYXRpb25UeXBlIjoic2NvcGVkS2V5Iiwic2NvcGVkS2V5S2V5IjoiMGM5ZGFmYjJiODI1MDcwNDRkNzciLCJzY29wZWRLZXlTZWNyZXQiOiI1MmQyMGU5Mzc4OThhNzYzOGJhZGE0MTUzZjBmMGZhODE2MGY3YWZiMjFhOTY5MmNmZDQ1NDA4ZDRjZGM4MDg1IiwiaWF0IjoxNzEyMzQ1NTMwfQ.z23TsuBNojo43e-O9NLBpGnqNcf6iGkY_BPlTAJd_uk";
 
@@ -27,6 +28,10 @@ const SingleFileUploader = () => {
   const handleUpload = async () => {
     if (file) {
       setStatus("uploading");
+      let _input = (document.getElementById('dweetContent') as HTMLFormElement).value;
+     // const _user = window.localStorage.getItem("userName");
+      console.log("user typed :",_input);
+      setComment(_input);
       
       const formData = new FormData();
       formData.append("file", file);
@@ -77,6 +82,10 @@ const SingleFileUploader = () => {
         </label>
         <input id="file" type="file" onChange={handleFileChange}  className="file-input file-input-bordered w-full max-w-xs"  />
       </div>
+      <div className="input-group mt-10">
+         <label htmlFor="dweetContent" className="col-form-label"></label>
+         <textarea className="textarea textarea-bordered" id="dweetContent" placeholder="type comment..."></textarea>
+      </div>
       {file && (
         <section>
           File details:
@@ -97,7 +106,7 @@ const SingleFileUploader = () => {
       <Result status={status} />
       {status==="success" && (
         <>
-         <StadiaIPFS hash={ipfs} comment="" />
+         <StadiaIPFS hash={ipfs} comment={comment} />
          <p>https://fuchsia-broken-goat-339.mypinata.cloud/ipfs/{ipfs}</p>
         </>
       )}

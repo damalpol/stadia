@@ -24,6 +24,9 @@ function StadiaIPFS(props: Props) {
  
   const init = async () => {
      (document.getElementById('my_modal_11')  as HTMLFormElement).showModal()
+
+     console.log("comment passed: ",props.comment);
+
     try {
 
          const [account] = await walletClient.requestAddresses();

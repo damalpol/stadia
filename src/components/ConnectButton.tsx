@@ -10,6 +10,7 @@ function ConnectButton() {
   const [account, setAccount] = useState<any>(null) 
   const [balance, setBalance] = useState<String>("0")
   const [chain, setChain] = useState<String>("")
+  const [user, setUser] = useState<any>("")
 
   //const addressInput = React.createRef<HTMLInputElement>()
   //const valueInput = React.createRef<HTMLInputElement>()
@@ -20,11 +21,32 @@ function ConnectButton() {
 
    }, []);
 
+  function generateUsername() {
+    var a = ["Shy", "Blue", "Ugly","Hungry"];
+    var b = ["Bear", "Dog", "Banana","Pirate"];
+
+    var rA = Math.floor(Math.random()*a.length);
+    var rB = Math.floor(Math.random()*b.length);
+    var name = a[rA] + b[rB];
+    return(name);
+  }
 
   const connect = async () => {
     try {
+      const username = generateUsername();
+      console.log("username :",username); // blossomlogistical732
+
       const [address] = await walletClient.requestAddresses()
       setAccount(address)
+
+      if (  window.localStorage.getItem("activeAccount")==address ) {
+        const _user = window.localStorage.getItem("userName");
+        setUser(_user);
+      } else {
+        window.localStorage.setItem("userName",username);
+        window.localStorage.setItem("activeAccount",address);
+        setUser(username);
+      }
 
       const chainId = await publicClient.getChainId() 
       setChain(String(chainId));
@@ -73,6 +95,7 @@ function ConnectButton() {
           <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
             <li><a>chain {chain}</a></li>
             <li><a>BNB {balance}</a></li>
+            <li><a>USER {user}</a></li>
           </ul>
       </details>
 

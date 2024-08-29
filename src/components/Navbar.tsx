@@ -32,7 +32,7 @@ export default function Navbar() {
     <ul className="hidden menu sm:menu-horizontal gap-2">
         <li><a  href="/wallet">Wallet</a></li>
         <li><a  href="/nft">NFT Membership</a></li>
-        <li><a  href="/browse">IPFS Post</a></li>
+        <li><a  href="/browse">BlockDataBase</a></li>
         <li><a  href="/">Home</a></li>
         
     </ul>
